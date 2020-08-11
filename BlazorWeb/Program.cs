@@ -28,7 +28,6 @@ namespace BlazorWeb
             {
                 builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
                 options.ProviderOptions.DefaultAccessTokenScopes.Add(scope);
-                options.ProviderOptions.AdditionalScopesToConsent.Add("https://graph.microsoft.com/openid");
             });
 
             await builder.Build().RunAsync();
