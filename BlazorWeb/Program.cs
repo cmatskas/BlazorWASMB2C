@@ -10,11 +10,13 @@ namespace BlazorWeb
 {
     public class Program
     {
-        private static string scope = @"https://cmatdevb2c.onmicrosoft.com/80978f9b-a2f9-44bf-8ae7-3c5099ff12b2/access_as_user";
+        //private static string scope = @"https://cmatdevb2c.onmicrosoft.com/80978f9b-a2f9-44bf-8ae7-3c5099ff12b2/access_as_user";
+        private static string scope = @"api://335f13f1-d1e5-4dcc-906b-29490177bd46/access_as_user";
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
+            
             builder.Services.AddScoped<CustomAuthorizationMessageHandler>();
 
             builder.Services.AddHttpClient("ServerAPI", 
@@ -23,10 +25,10 @@ namespace BlazorWeb
 
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
                 .CreateClient("ServerAPI"));
-
+            
             builder.Services.AddMsalAuthentication(options =>
             {
-                builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
+                builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
                 options.ProviderOptions.DefaultAccessTokenScopes.Add(scope);
             });
 
