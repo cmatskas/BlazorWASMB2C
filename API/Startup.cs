@@ -23,8 +23,8 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMicrosoftWebApiAuthentication(Configuration);
-            /*services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //services.AddMicrosoftWebApiAuthentication(Configuration);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddMicrosoftWebApi(options =>
                     {
                         options.MetadataAddress= Configuration["MetadataAddress"];
@@ -38,8 +38,7 @@ namespace API
 
                         options.TokenValidationParameters.NameClaimType = "name";
                     },
-                    options => { Configuration.Bind("AzureAd", options); });
-            */
+                    options => { Configuration.Bind("AzureAdB2C", options); });
             services.AddControllers();           
             services.AddAuthorization(options =>
             {
